@@ -35,7 +35,7 @@ config :chat, ChatWeb.Endpoint,
 # If you are doing OTP releases, you need to instruct Phoenix
 # to start each relevant endpoint:
 #
-#     config :chat, ChatWeb.Endpoint, server: true
+config :chat, ChatWeb.Endpoint, server: true
 #
 # Then you can assemble a release by calling `mix release`.
 # See `mix help release` for more information.
