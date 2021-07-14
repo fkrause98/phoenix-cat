@@ -27,7 +27,8 @@ channel.join(); // join the channel.
 
 let ul = document.getElementById('msg-list');        // list of messages.
 let name = document.getElementById('name');          // name of message sender
-let msg = document.getElementById('msg');            // message input field
+let msg = document.getElementById('msg');        // message input field
+let clear = document.getElementById('clear');
 
 // "listen" for the [Enter] keypress event to send a message:
 msg.addEventListener('keypress', function (event) {
@@ -38,4 +39,9 @@ msg.addEventListener('keypress', function (event) {
     });
     msg.value = '';         // reset the message input field for next message.
   }
+});
+
+clear.addEventListener('click', function(event) {
+  channel.push('clear',{});
+  window.location.reload();
 });
