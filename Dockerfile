@@ -1,7 +1,8 @@
-FROM elixir:1.9.0-alpine AS build
-
+FROM bitwalker/alpine-elixir-phoenix:latest AS build
 # install build dependencies
-RUN apk add --no-cache build-base npm git python
+RUN apk add --no-cache postgresql-client bash openssl libgcc libstdc++ ncurses-libs git npm
+RUN apk upgrade --no-cache
+
 
 # prepare build dir
 WORKDIR /app
@@ -36,8 +37,9 @@ COPY lib lib
 RUN mix do compile, release
 
 # prepare release image
-FROM alpine:3.9 AS app
-RUN apk add --no-cache openssl ncurses-libs
+FROM bitwalker/alpine-elixir-phoenix:latest AS app
+
+RUN apk add --no-cache openssl ncurses-libs libstdc++
 
 WORKDIR /app
 
