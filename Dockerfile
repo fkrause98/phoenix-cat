@@ -12,7 +12,8 @@ RUN mix local.hex --force && \
 
 # set build ENV
 ENV MIX_ENV=prod
-ENV RUNNING_ON=DOCKER
+ENV DATABASE_URL=ecto://postgres:postgres@localhost:5432/chat_dev
+ENV SECRET_KEY_BASE=p34bHfW2Og27xrqhYOzicPj/LWp59pWbeEnnMb5TTRgwnYaNuHd8qm/nRq3yFcVs
 
 # install mix dependencies
 COPY mix.exs mix.lock ./
@@ -44,8 +45,8 @@ RUN chown nobody:nobody /app
 
 USER nobody:nobody
 
-COPY --from=build --chown=nobody:nobody /app/_build/prod/rel/my_app ./
+COPY --from=build --chown=nobody:nobody /app/_build/prod/rel/chat ./
 
 ENV HOME=/app
 
-CMD ["bin/my_app", "start"]
+CMD ["bin/chat", "start"]
